@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Inferno Complaints</title>
     <style>
-               /* Global Styles */
+        /* Global Styles */
         * {
             margin: 0;
             padding: 0;
@@ -184,55 +184,56 @@
             line-height: 1.8;
         }
 
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .team-member {
+        /* Founder Card */
+        .founder-card {
+            max-width: 600px;
+            margin: 3rem auto;
             background: rgba(30, 30, 30, 0.9);
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 5px solid #8B0000;
         }
 
-        .team-member:hover {
-            transform: translateY(-10px);
-        }
-
-        .member-image {
-            height: 300px;
+        .founder-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
             background-size: cover;
             background-position: center;
+            margin-bottom: 1.5rem;
+            border: 3px solid #FF4500;
         }
 
-        .member-info {
-            padding: 1.5rem;
+        .founder-quote {
+            font-style: italic;
+            color: #FFA500;
+            margin: 1.5rem 0;
+            position: relative;
         }
 
-        .member-info h4 {
+        .founder-quote:before,
+        .founder-quote:after {
+            content: '"';
             color: #FF6347;
             font-size: 1.5rem;
-            margin-bottom: 0.5rem;
         }
 
-        .member-info .position {
+        .position {
             color: #FFA500;
             margin-bottom: 1rem;
             font-weight: bold;
         }
 
-        .member-info p {
-            color: #AAA;
-            margin-bottom: 1rem;
-        }
-
         .social-links {
             display: flex;
             gap: 1rem;
+            margin-top: 1rem;
         }
 
         .social-links a {
@@ -362,68 +363,58 @@
                 font-size: 2.5rem;
             }
         }
-        
-        /* Simplified Team Section */
-        .founder-card {
-            max-width: 600px;
-            margin: 3rem auto;
-            background: rgba(30, 30, 30, 0.9);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem;
-            text-align: center;
-            border-bottom: 5px solid #8B0000;
-        }
-
-        .founder-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background-size: cover;
-            background-position: center;
-            margin-bottom: 1.5rem;
-            border: 3px solid #FF4500;
-        }
-
-        .founder-quote {
-            font-style: italic;
-            color: #FFA500;
-            margin: 1.5rem 0;
-            position: relative;
-        }
-
-        .founder-quote:before,
-        .founder-quote:after {
-            content: '"';
-            color: #FF6347;
-            font-size: 1.5rem;
-        }
-
-        /* [Rest of the CSS remains the same] */
     </style>
 </head>
 <body>
     <div class="overlay">
-        <!-- [Header and Hero sections remain exactly the same] -->
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <img src="https://via.placeholder.com/50x50" alt="Inferno Complaints Logo">
+                        <div class="logo-text">
+                            <h1>INFERNO COMPLAINTS</h1>
+                            <p>Where grievances burn and accountability rises</p>
+                        </div>
+                    </div>
+                    <button class="mobile-menu-btn">☰</button>
+                    <nav>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="submit-complaint.html">File Complaint</a></li>
+                            <li><a href="proof-guidelines.html">Submit Proof</a></li>
+                            <li><a href="help.html">Help</a></li>
+                            <li><a href="about.html" class="active">About</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <section class="about-hero">
+            <div class="container">
+                <h2>One Man. One Mission.</h2>
+                <p>Turning bureaucratic indifference into fiery accountability</p>
+            </div>
+        </section>
 
         <div class="container">
             <div class="about-content">
                 <section class="about-section">
-                    <h3>One-Man Accountability Machine</h3>
-                    <p>Inferno Complaints is the fiery passion project of a single developer-activist determined to make bureaucracy feel the heat. Founded in 2024, this platform proves that one committed individual can fan the flames of change.</p>
+                    <h3>My Fiery Origin</h3>
+                    <p>Inferno Complaints began as a personal project after years of watching legitimate complaints disappear into bureaucratic black holes. As a solo developer with government experience, I built this platform to ensure no grievance would ever be ignored again.</p>
                     
                     <div class="mission-statement">
-                        <p>"I built this platform because I believe every complaint deserves to burn bright until it gets answers. No team? No problem. My code and persistence keep this inferno raging."</p>
+                        <p>"I may work alone, but I burn twice as hot. Every complaint that comes through this system gets my personal attention until it's resolved."</p>
                     </div>
+                    
+                    <p>This isn't some faceless corporation - it's one determined individual using technology to hold power accountable. No committees, no bureaucracy, just relentless focus on results.</p>
                 </section>
 
                 <section class="about-section">
-                    <h3>My Impact</h3>
-                    <p>Working alone but making noise together with citizens:</p>
+                    <h3>My Impact By Numbers</h3>
+                    <p>The proof is in the results:</p>
                     
                     <div class="stats-grid">
                         <div class="stat-item">
@@ -439,14 +430,14 @@
                             <div class="stat-label">Issues Resolved</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">24/7</div>
-                            <div class="stat-label">One-Man Operation</div>
+                            <div class="stat-number">1</div>
+                            <div class="stat-label">Determined Founder</div>
                         </div>
                     </div>
                 </section>
 
                 <section class="about-section">
-                    <h3>The Lone Spark</h3>
+                    <h3>The Lone Firestarter</h3>
                     
                     <div class="founder-card">
                         <div class="founder-image" style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
@@ -454,10 +445,10 @@
                         <div class="position">Founder, Developer & Chief Firestarter</div>
                         
                         <div class="founder-quote">
-                            I handle everything from code to customer support because accountability shouldn't require a committee
+                            I handle everything from code to customer support because accountability shouldn't require bureaucracy
                         </div>
                         
-                        <p>Former government IT worker turned full-time accountability activist. Built this platform after seeing how complaints die in bureaucratic purgatory. Now I ensure every grievance gets oxygen.</p>
+                        <p>Former government IT specialist turned full-time accountability activist. Built this entire platform from scratch after seeing how the system fails citizens daily. Now I'm the one making sure complaints get answered.</p>
                         
                         <div class="social-links">
                             <a href="#"><i class="fab fa-twitter"></i></a>
@@ -466,16 +457,16 @@
                         </div>
                     </div>
                     
-                    <p style="text-align:center; max-width:800px; margin:2rem auto;">What I lack in team size, I make up for in relentless persistence. Every feature on this platform was coded by these hands, every complaint followed up with personal attention. This isn't a corporation - it's a one-man crusade to make government feel the heat.</p>
+                    <p style="text-align:center; max-width:800px; margin:2rem auto;">What I lack in team size, I make up for in relentless persistence. Every feature on this platform was coded by my hands, every complaint gets my personal follow-up. This isn't a corporation - it's a one-man crusade to make government feel the heat.</p>
                 </section>
 
                 <section class="about-section">
-                    <h3>My Fiery Method</h3>
+                    <h3>My Battle-Tested Process</h3>
                     <div class="stats-grid">
                         <div class="stat-item">
                             <div class="stat-number">1</div>
-                            <div class="stat-label">I Code</div>
-                            <p style="color:#CCC; margin-top:1rem;">Built this entire platform solo with 100% custom code</p>
+                            <div class="stat-label">I Build</div>
+                            <p style="color:#CCC; margin-top:1rem;">Coded this entire platform solo with custom solutions</p>
                         </div>
                         <div class="stat-item">
                             <div class="stat-number">2</div>
@@ -485,14 +476,14 @@
                         <div class="stat-item">
                             <div class="stat-number">3</div>
                             <div class="stat-label">I Persist</div>
-                            <p style="color:#CCC; margin-top:1rem;">Relentless follow-ups until resolution</p>
+                            <p style="color:#CCC; margin-top:1rem;">Daily follow-ups until resolution is achieved</p>
                         </div>
                     </div>
                 </section>
 
                 <section class="about-section">
-                    <h3>Fuel My Fire</h3>
-                    <p>This one-man operation runs on caffeine and conviction. Here's how you can keep the flames burning:</p>
+                    <h3>Fuel the Fire</h3>
+                    <p>This solo operation runs on caffeine and conviction. Here's how you can help keep the flames burning:</p>
                     <ul style="color:#CCC; margin-left:1.5rem; margin-bottom:1.5rem;">
                         <li><strong>File complaints</strong> - More cases mean more impact</li>
                         <li><strong>Share successes</strong> - Viral wins attract more users</li>
@@ -508,7 +499,49 @@
             </div>
         </div>
 
-        <!-- [Footer remains exactly the same] -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="submit-complaint.html">File Complaint</a></li>
+                            <li><a href="proof-guidelines.html">Submit Proof</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="help.html">Help Center</a></li>
+                            <li><a href="#">Success Stories</a></li>
+                            <li><a href="#">Government Contacts</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>About</h4>
+                        <ul>
+                            <li><a href="about.html">My Mission</a></li>
+                            <li><a href="#">Transparency</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Facebook</a></li>
+                            <li><a href="#">Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 Inferno Complaints. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+                </div>
+            </div>
+        </footer>
     </div>
 
     <!-- Font Awesome for social icons -->
