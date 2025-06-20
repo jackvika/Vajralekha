@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center - Inferno Complaints</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #111;
+            color: #ddd;
+            background-image: url('https://images.unsplash.com/photo-1518562180175-34a163b1a9a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            line-height: 1.6;
+        }
+
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.85);
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(to bottom, rgba(139,0,0,0.9), rgba(80,0,0,0.7));
+            padding: 1rem 0;
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .logo-text h1 {
+            color: #FF4500;
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .logo-text p {
+            color: #FF6347;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #FFA500;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #FF4500;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Help Hero */
+        .help-hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .help-hero h2 {
+            font-size: 3.5rem;
+            color: #FF4500;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px #000;
+        }
+
+        .help-hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #EEE;
+        }
+
+        /* Help Content */
+        .help-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            padding: 2rem 0 4rem;
+        }
+
+        @media (max-width: 992px) {
+            .help-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Help Sidebar Navigation */
+        .help-nav {
+            background: rgba(30, 30, 30, 0.9);
+            border-radius: 8px;
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .help-nav h3 {
+            color: #FFA500;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #8B0000;
+        }
+
+        .help-nav ul {
+            list-style: none;
+        }
+
+        .help-nav li {
+            margin-bottom: 0.8rem;
+        }
+
+        .help-nav a {
+            color: #DDD;
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .help-nav a:hover,
+        .help-nav a.active {
+            color: #FFA500;
+            background: rgba(139, 0, 0, 0.3);
+        }
+
+        .help-nav a:before {
+            content: "»";
+            color: #FF4500;
+            margin-right: 10px;
+        }
+
+        /* Help Sections */
+        .help-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .help-section {
+            background: rgba(30, 30, 30, 0.9);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-left: 4px solid #8B0000;
+        }
+
+        .help-section h3 {
+            color: #FFA500;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .help-section h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: #FF4500;
+            bottom: -10px;
+            left: 0;
+        }
+
+        .help-section p {
+            color: #CCC;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .help-section ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #CCC;
+        }
+
+        .help-section li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-question {
+            color: #FF6347;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-question:before {
+            content: "+";
+            margin-right: 10px;
+            color: #FF4500;
+            font-weight: bold;
+        }
+
+        .faq-answer {
+            color: #AAA;
+            padding-left: 1.5rem;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question:before {
+            content: "-";
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #FFA500;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(50, 50, 50, 0.8);
+            border: 1px solid #555;
+            border-radius: 5px;
+            color: #EEE;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(to right, #8B0000, #A52A2A);
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(to right, #A52A2A, #8B0000);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to top, rgba(139,0,0,0.9), rgba(80,0,0,0.7));
+            padding: 3rem 0 1.5rem;
+            color: #DDD;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h4 {
+            color: #FFA500;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: #FF4500;
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #DDD;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: #FFA500;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #8B0000;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #FFD700;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 1rem;
+                justify-content: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .help-hero h2 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <img src="https://via.placeholder.com/50x50" alt="Inferno Complaints Logo">
+                        <div class="logo-text">
+                            <h1>INFERNO COMPLAINTS</h1>
+                            <p>Where grievances burn and accountability rises</p>
+                        </div>
+                    </div>
+                    <button class="mobile-menu-btn">☰</button>
+                    <nav>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="blogs.html">Blog</a></li>
+                            <li><a href="file-a-complaint.html">File Complaint</a></li>
+                            <li><a href="submit-proof.html">Submit Proof</a></li>
+                            <li><a href="help.html" class="active">Help</a></li>
+                            <li><a href="about.html">About</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <section class="help-hero">
+            <div class="container">
+                <h2>Help Center</h2>
+                <p>Find answers to your questions and get support for your complaints</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="help-content">
+                <aside class="help-nav">
+                    <h3>Help Topics</h3>
+                    <ul>
+                        <li><a href="#getting-started" class="active">Getting Started</a></li>
+                        <li><a href="#filing-complaints">Filing Complaints</a></li>
+                        <li><a href="#submitting-proof">Submitting Proof</a></li>
+                        <li><a href="#tracking-complaints">Tracking Complaints</a></li>
+                        <li><a href="#faqs">FAQs</a></li>
+                        <li><a href="#contact-support">Contact Support</a></li>
+                    </ul>
+                </aside>
+
+                <main class="help-sections">
+                    <section id="getting-started" class="help-section">
+                        <h3>Getting Started</h3>
+                        <p>Welcome to Inferno Complaints, your platform for holding authorities accountable. Here's how to begin:</p>
+                        <ul>
+                            <li><strong>Create an account</strong> (optional but recommended for tracking)</li>
+                            <li><strong>Browse existing complaints</strong> to see how the process works</li>
+                            <li><strong>Prepare your evidence</strong> before filing a new complaint</li>
+                            <li><strong>Understand the complaint categories</strong> to file properly</li>
+                        </ul>
+                        <p>Our system is designed to amplify citizen voices through documented, evidence-backed complaints.</p>
+                    </section>
+
+                    <section id="filing-complaints" class="help-section">
+                        <h3>Filing Complaints</h3>
+                        <p>To file an effective complaint that gets results:</p>
+                        <ul>
+                            <li><strong>Be specific</strong> about dates, locations, and officials involved</li>
+                            <li><strong>Include clear evidence</strong> (photos, documents, videos)</li>
+                            <li><strong>Focus on one issue per complaint</strong> for better tracking</li>
+                            <li><strong>Provide contact information</strong> for follow-up questions</li>
+                            <li><strong>Check for existing complaints</strong> about the same issue</li>
+                        </ul>
+                        <p>Well-documented complaints are processed faster and get better responses from authorities.</p>
+                    </section>
+
+                    <section id="submitting-proof" class="help-section">
+                        <h3>Submitting Proof</h3>
+                        <p>Evidence strengthens your complaint. Follow these guidelines:</p>
+                        <ul>
+                            <li><strong>Accepted formats:</strong> JPG, PNG, PDF, MP4, DOC, XLS (25MB max total)</li>
+                            <li><strong>Photo evidence:</strong> Clear, timestamped, with location if possible</li>
+                            <li><strong>Documents:</strong> Redact personal information before uploading</li>
+                            <li><strong>Videos:</strong> Short clips (under 2 minutes) with clear context</li>
+                            <li><strong>Witness statements:</strong> Include contact information</li>
+                        </ul>
+                        <p>You can add more evidence to existing complaints using your complaint ID.</p>
+                    </section>
+
+                    <section id="tracking-complaints" class="help-section">
+                        <h3>Tracking Complaints</h3>
+                        <p>Monitor your complaint's progress through these methods:</p>
+                        <ul>
+                            <li><strong>Check your email</strong> for status updates</li>
+                            <li><strong>Use your complaint ID</strong> to track online</li>
+                            <li><strong>View our blog</strong> for resolved complaint stories</li>
+                            <li><strong>Response times vary</strong> by department (typically 7-14 days)</li>
+                        </ul>
+                        <p>If your complaint hasn't received a response in 30 days, contact us for follow-up.</p>
+                    </section>
+
+                    <section id="faqs" class="help-section">
+                        <h3>Frequently Asked Questions</h3>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">How long does it take to get a response?</div>
+                            <div class="faq-answer">
+                                <p>Most complaints receive an initial response within 7-14 business days. Complex cases may take longer. We follow up with authorities weekly until we receive a response.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">Can I file anonymous complaints?</div>
+                            <div class="faq-answer">
+                                <p>While you can submit without creating an account, valid contact information is required for officials to respond. We never share your details without permission.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">What types of complaints are not accepted?</div>
+                            <div class="faq-answer">
+                                <p>We don't handle personal disputes, private business complaints, or matters before courts. Illegal content or harassment reports will be removed.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">How do I escalate an unresolved complaint?</div>
+                            <div class="faq-answer">
+                                <p>After 30 days with no response, email us at complaints@inferno.com with your complaint ID. We'll initiate official follow-up procedures.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">Can I edit my complaint after submission?</div>
+                            <div class="faq-answer">
+                                <p>While you can't edit the original complaint, you can submit additional information or corrections using your complaint ID.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="contact-support" class="help-section">
+                        <h3>Contact Support</h3>
+                        <p>Still need help? Send us a message:</p>
+                        
+                        <form class="contact-form" action="/contact-support" method="POST">
+                            <div class="form-group">
+                                <label for="contact-name">Your Name</label>
+                                <input type="text" id="contact-name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact-email">Email Address</label>
+                                <input type="email" id="contact-email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact-subject">Subject</label>
+                                <select id="contact-subject" name="subject" required>
+                                    <option value="">Select a topic</option>
+                                    <option value="complaint-help">Help with complaint</option>
+                                    <option value="proof-help">Evidence submission</option>
+                                    <option value="technical">Technical issue</option>
+                                    <option value="other">Other inquiry</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact-message">Message</label>
+                                <textarea id="contact-message" name="message" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </section>
+                </main>
+            </div>
+        </div>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="submit-complaint.html">File Complaint</a></li>
+                            <li><a href="proof-guidelines.html">Submit Proof</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="help.html">Help Center</a></li>
+                            <li><a href="#">Success Stories</a></li>
+                            <li><a href="#">Government Contacts</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>About Us</h4>
+                        <ul>
+                            <li><a href="about.html">Our Mission</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Transparency</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Facebook</a></li>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">YouTube</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 Inferno Complaints. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // Smooth scrolling for help nav
+        document.querySelectorAll('.help-nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                // Update active state
+                document.querySelectorAll('.help-nav a').forEach(navLink => {
+                    navLink.classList.remove('active');
+                });
+                link.classList.add('active');
+                
+                // Smooth scroll
+                targetSection.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                const nav = document.querySelector('nav');
+                nav.style.display = nav.style.display === 'none' ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
