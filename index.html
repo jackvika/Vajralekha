@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inferno Complaints - Hold Authorities Accountable</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #111;
+            color: #ddd;
+            background-image: url('https://images.unsplash.com/photo-1518562180175-34a163b1a9a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            line-height: 1.6;
+        }
+
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.85);
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(to bottom, rgba(139,0,0,0.9), rgba(80,0,0,0.7));
+            padding: 1rem 0;
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .logo-text h1 {
+            color: #FF4500;
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .logo-text p {
+            color: #FF6347;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #FFA500;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #FF4500;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            margin-bottom: 3rem;
+            border-bottom: 1px solid #8B0000;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            color: #FF4500;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 6px #000;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: #EEE;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #8B0000;
+            color: #FFF;
+            border: 2px solid #FF4500;
+        }
+
+        .btn-primary:hover {
+            background-color: #A52A2A;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #FFA500;
+            border: 2px solid #FFA500;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 165, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h3 {
+            font-size: 2.2rem;
+            color: #FF6347;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h3::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: #8B0000;
+            bottom: -10px;
+            left: 25%;
+        }
+
+        .section-title p {
+            color: #AAA;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s;
+            border-left: 4px solid #8B0000;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(139, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #FF4500;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            color: #FFA500;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #CCC;
+        }
+
+        /* Recent Complaints */
+        .recent-complaints {
+            padding: 4rem 0;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .complaints-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .complaint-card {
+            background: rgba(40, 40, 40, 0.9);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+
+        .complaint-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .complaint-header {
+            background: #8B0000;
+            padding: 1rem;
+            color: #FFF;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .complaint-status {
+            background: #FFA500;
+            color: #000;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .complaint-body {
+            padding: 1.5rem;
+        }
+
+        .complaint-title {
+            font-size: 1.3rem;
+            color: #FF6347;
+            margin-bottom: 1rem;
+        }
+
+        .complaint-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #AAA;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed #555;
+            padding-bottom: 1rem;
+        }
+
+        .complaint-excerpt {
+            color: #DDD;
+            margin-bottom: 1.5rem;
+        }
+
+        .read-more {
+            color: #FFA500;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            transition: color 0.3s;
+        }
+
+        .read-more:hover {
+            color: #FFD700;
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to top, rgba(139,0,0,0.9), rgba(80,0,0,0.7));
+            padding: 3rem 0 1.5rem;
+            color: #DDD;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h4 {
+            color: #FFA500;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: #FF4500;
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #DDD;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: #FFA500;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #8B0000;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #FFD700;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 1rem;
+                justify-content: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <img src="https://via.placeholder.com/50x50" alt="Inferno Complaints Logo">
+                        <div class="logo-text">
+                            <h1>INFERNO COMPLAINTS</h1>
+                            <p>Where grievances burn and accountability rises</p>
+                        </div>
+                    </div>
+                    <button class="mobile-menu-btn">☰</button>
+                    <nav>
+                        <ul>
+                            <li><a href="#" class="active">Home</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="submit-complaint.html">File Complaint</a></li>
+                            <li><a href="proof-guidelines.html">Submit Proof</a></li>
+                            <li><a href="help.html">Help</a></li>
+                            <li><a href="about.html">About</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <section class="hero">
+            <div class="container">
+                <h2>Your Voice Against Injustice</h2>
+                <p>Inferno Complaints is a platform where citizens can report issues, track government responses, and hold authorities accountable. We turn your complaints into fire that authorities cannot ignore.</p>
+                <div class="cta-buttons">
+                    <a href="submit-complaint.html" class="btn btn-primary">File a Complaint Now</a>
+                    <a href="blog.html" class="btn btn-secondary">See Recent Responses</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <div class="section-title">
+                    <h3>How It Works</h3>
+                    <p>Our platform makes it easy to report issues and track their resolution through official channels</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📝</div>
+                        <h4>File Your Complaint</h4>
+                        <p>Submit detailed complaints about civic issues, corruption, or government inefficiency with supporting evidence.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔥</div>
+                        <h4>We Amplify Your Voice</h4>
+                        <p>Our team ensures your complaint reaches the right authorities through proper channels and follows up relentlessly.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📢</div>
+                        <h4>Get Official Responses</h4>
+                        <p>Track responses from government departments and see what actions are being taken to resolve your issue.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="recent-complaints">
+            <div class="container">
+                <div class="section-title">
+                    <h3>Recently Resolved Complaints</h3>
+                    <p>See how our platform has helped citizens get their issues addressed</p>
+                </div>
+                <div class="complaints-grid">
+                    <div class="complaint-card">
+                        <div class="complaint-header">
+                            <span>Public Works</span>
+                            <span class="complaint-status">RESOLVED</span>
+                        </div>
+                        <div class="complaint-body">
+                            <h4 class="complaint-title">Potholes on Main Road Causing Accidents</h4>
+                            <div class="complaint-meta">
+                                <span>Filed by: Ramesh P.</span>
+                                <span>15 Jun 2024</span>
+                            </div>
+                            <p class="complaint-excerpt">The main road near the city center has developed dangerous potholes that have caused several bike accidents in the past month...</p>
+                            <a href="complaint-details.html" class="read-more">Read Full Story →</a>
+                        </div>
+                    </div>
+                    <div class="complaint-card">
+                        <div class="complaint-header">
+                            <span>Water Department</span>
+                            <span class="complaint-status">RESOLVED</span>
+                        </div>
+                        <div class="complaint-body">
+                            <h4 class="complaint-title">No Water Supply in Sector 7 for 10 Days</h4>
+                            <div class="complaint-meta">
+                                <span>Filed by: Priya M.</span>
+                                <span>10 Jun 2024</span>
+                            </div>
+                            <p class="complaint-excerpt">Our neighborhood has been without water supply for over a week with no explanation from authorities...</p>
+                            <a href="complaint-details.html" class="read-more">Read Full Story →</a>
+                        </div>
+                    </div>
+                    <div class="complaint-card">
+                        <div class="complaint-header">
+                            <span>Electricity Board</span>
+                            <span class="complaint-status">IN PROGRESS</span>
+                        </div>
+                        <div class="complaint-body">
+                            <h4 class="complaint-title">Faulty Street Lights in Park Area</h4>
+                            <div class="complaint-meta">
+                                <span>Filed by: Amit S.</span>
+                                <span>5 Jun 2024</span>
+                            </div>
+                            <p class="complaint-excerpt">The children's park near Gandhi Nagar has had non-functional street lights for three weeks, making it unsafe...</p>
+                            <a href="complaint-details.html" class="read-more">Read Full Story →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="submit-complaint.html">File Complaint</a></li>
+                            <li><a href="proof-guidelines.html">Proof Guidelines</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="help.html">Help Center</a></li>
+                            <li><a href="#">Success Stories</a></li>
+                            <li><a href="#">Government Contacts</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>About Us</h4>
+                        <ul>
+                            <li><a href="about.html">Our Mission</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Transparency</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Facebook</a></li>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">YouTube</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 Inferno Complaints. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
