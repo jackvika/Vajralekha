@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File a Complaint - Inferno Complaints</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #111;
+            color: #ddd;
+            background-image: url('https://images.unsplash.com/photo-1518562180175-34a163b1a9a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            line-height: 1.6;
+        }
+
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.85);
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(to bottom, rgba(139,0,0,0.9), rgba(80,0,0,0.7));
+            padding: 1rem 0;
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .logo-text h1 {
+            color: #FF4500;
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .logo-text p {
+            color: #FF6347;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #FFA500;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #FF4500;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Complaint Hero */
+        .complaint-hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .complaint-hero h2 {
+            font-size: 3.5rem;
+            color: #FF4500;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px #000;
+        }
+
+        .complaint-hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #EEE;
+        }
+
+        /* Complaint Form */
+        .complaint-form-container {
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            background: rgba(30, 30, 30, 0.9);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border-left: 5px solid #8B0000;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-header h3 {
+            color: #FFA500;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            color: #AAA;
+        }
+
+        .complaint-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .complaint-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #FFA500;
+            font-weight: bold;
+        }
+
+        .complaint-form input[type="text"],
+        .complaint-form input[type="email"],
+        .complaint-form input[type="tel"],
+        .complaint-form input[type="date"],
+        .complaint-form select,
+        .complaint-form textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(50, 50, 50, 0.8);
+            border: 1px solid #555;
+            border-radius: 5px;
+            color: #EEE;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .complaint-form input:focus,
+        .complaint-form select:focus,
+        .complaint-form textarea:focus {
+            outline: none;
+            border-color: #FF4500;
+            box-shadow: 0 0 0 2px rgba(255, 69, 0, 0.3);
+        }
+
+        .complaint-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .required-field::after {
+            content: " *";
+            color: #FF4500;
+        }
+
+        .file-upload {
+            margin-top: 1rem;
+        }
+
+        .file-upload-label {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: rgba(139, 0, 0, 0.5);
+            color: #FFA500;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px dashed #8B0000;
+        }
+
+        .file-upload-label:hover {
+            background: rgba(139, 0, 0, 0.7);
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-name {
+            margin-top: 0.5rem;
+            color: #AAA;
+            font-size: 0.9rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(to right, #8B0000, #A52A2A);
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(to right, #A52A2A, #8B0000);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.5);
+        }
+
+        /* Privacy Notice */
+        .privacy-notice {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(139, 0, 0, 0.2);
+            border-left: 3px solid #FF4500;
+            border-radius: 5px;
+        }
+
+        .privacy-notice h4 {
+            color: #FFA500;
+            margin-bottom: 0.5rem;
+        }
+
+        .privacy-notice p {
+            color: #AAA;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to top, rgba(139,0,0,0.9), rgba(80,0,0,0.7));
+            padding: 3rem 0 1.5rem;
+            color: #DDD;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h4 {
+            color: #FFA500;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: #FF4500;
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #DDD;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: #FFA500;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #8B0000;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #FFD700;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 1rem;
+                justify-content: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .complaint-hero h2 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+    <script>
+        function displayFileName(input) {
+            const fileName = input.files[0] ? input.files[0].name : "No file chosen";
+            document.getElementById('file-name').textContent = fileName;
+        }
+    </script>
+</head>
+<body>
+    <div class="overlay">
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <img src="https://via.placeholder.com/50x50" alt="Inferno Complaints Logo">
+                        <div class="logo-text">
+                            <h1>INFERNO COMPLAINTS</h1>
+                            <p>Where grievances burn and accountability rises</p>
+                        </div>
+                    </div>
+                    <button class="mobile-menu-btn">☰</button>
+                    <nav>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="submit-complaint.html" class="active">File Complaint</a></li>
+                            <li><a href="proof-guidelines.html">Submit Proof</a></li>
+                            <li><a href="help.html">Help</a></li>
+                            <li><a href="about.html">About</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <section class="complaint-hero">
+            <div class="container">
+                <h2>File Your Complaint</h2>
+                <p>Your voice matters. Report issues directly to authorities with our help and track the response.</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="complaint-form-container">
+                <div class="form-header">
+                    <h3>Complaint Submission Form</h3>
+                    <p>Fill out all required fields to ensure your complaint is properly processed</p>
+                </div>
+
+                <form class="complaint-form" action="/submit-complaint" method="POST" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name" class="required-field">First Name</label>
+                            <input type="text" id="first-name" name="first-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name" class="required-field">Last Name</label>
+                            <input type="text" id="last-name" name="last-name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email" class="required-field">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="complaint-type" class="required-field">Type of Complaint</label>
+                        <select id="complaint-type" name="complaint-type" required>
+                            <option value="">Select a category</option>
+                            <option value="road">Roads & Transportation</option>
+                            <option value="water">Water Supply</option>
+                            <option value="electricity">Electricity</option>
+                            <option value="sanitation">Sanitation & Waste</option>
+                            <option value="corruption">Corruption</option>
+                            <option value="safety">Public Safety</option>
+                            <option value="health">Healthcare</option>
+                            <option value="education">Education</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date" class="required-field">Date of Incident</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location" class="required-field">Location</label>
+                            <input type="text" id="location" name="location" placeholder="Street, Landmark, City" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject" class="required-field">Complaint Title</label>
+                        <input type="text" id="subject" name="subject" placeholder="Brief description of your complaint" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description" class="required-field">Detailed Description</label>
+                        <textarea id="description" name="description" required placeholder="Provide all relevant details including:
+- What happened
+- How it affects you/community
+- Previous attempts to resolve
+- Any officials contacted"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload Evidence</label>
+                        <div class="file-upload">
+                            <label for="evidence" class="file-upload-label">Choose Files (Photos, Videos, Documents)</label>
+                            <input type="file" id="evidence" name="evidence" multiple onchange="displayFileName(this)">
+                            <div id="file-name" class="file-name">No files chosen</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="authority">Concerned Authority (if known)</label>
+                        <input type="text" id="authority" name="authority" placeholder="e.g. Municipal Corporation, Electricity Board">
+                    </div>
+
+                    <div class="privacy-notice">
+                        <h4>Privacy Notice</h4>
+                        <p>We take your privacy seriously. Your personal information will only be used to process this complaint and will not be shared publicly without your consent. However, complaint details (without personal identifiers) may be published to track government responses.</p>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit Complaint</button>
+                </form>
+            </div>
+        </div>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="submit-complaint.html">File Complaint</a></li>
+                            <li><a href="proof-guidelines.html">Proof Guidelines</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="help.html">Help Center</a></li>
+                            <li><a href="#">Success Stories</a></li>
+                            <li><a href="#">Government Contacts</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>About Us</h4>
+                        <ul>
+                            <li><a href="about.html">Our Mission</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Transparency</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Facebook</a></li>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">YouTube</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 Inferno Complaints. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
